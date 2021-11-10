@@ -5,7 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import mainView from './mainView'
+import { BleManager } from 'react-native-ble-plx';
 
 
 export default function App() {
