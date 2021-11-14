@@ -25,7 +25,7 @@ export default function App() {
           tabBarInactiveTintColor: 'gray',
         }}>
 
-        <tabs.Screen name="main" component={mainView} />
+        <tabs.Screen name="mainView" component={mainView} />
 
       </tabs.Navigator >
     </NavigationContainer>

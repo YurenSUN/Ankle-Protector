@@ -1,5 +1,3 @@
-// https://github.com/innoveit/react-native-ble-manager/blob/master/BleManager.js
-
 "use strict";
 var React = require("react-native");
 var bleManager = React.NativeModules.BleManager;
@@ -133,9 +131,9 @@ class BleManager {
     });
   }
 
-  createBond(peripheralId, peripheralPin = null) {
+  createBond(peripheralId,peripheralPin=null) {
     return new Promise((fulfill, reject) => {
-      bleManager.createBond(peripheralId, peripheralPin, error => {
+      bleManager.createBond(peripheralId,peripheralPin, error => {
         if (error) {
           reject(error);
         } else {

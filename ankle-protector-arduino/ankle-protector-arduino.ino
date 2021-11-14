@@ -1,17 +1,22 @@
 #include <ArduinoBLE.h>
 
 static const char* greeting = "BLE Greeting";
-BLEService greetingService("180C");  // User defined service
-BLEStringCharacteristic greetingCharacteristic("2A56",  // standard 16-bit characteristic UUID
+BLEService sensorService("180C");  // User defined service
+BLEStringCharacteristic sensorCharacteristic("2A56",  // standard 16-bit characteristic UUID
     BLERead, 13); // remote clients will only be able to read this
 
+//Right flex
+const int flexPinR = A0;
 
-const int flexPin1 = A0;
+//Right force
+const int forcePinR = A6;
+
 
 void setup() {
   // initialize serial communication at 9600 bits per second:
   Serial.begin(9600);
-  while (!Serial);
+  // Only connect when using serial monitor
+//  while (!Serial);
 
   pinMode(LED_BUILTIN, OUTPUT); // initialize the built-in LED pin
 
@@ -21,10 +26,10 @@ void setup() {
   }
 
   BLE.setLocalName("Nano33BLE");  // Set name for connection
-  BLE.setAdvertisedService(greetingService); // Advertise service
-  greetingService.addCharacteristic(greetingCharacteristic); // Add characteristic to service
-  BLE.addService(greetingService); // Add service
-  greetingCharacteristic.setValue(greeting); // Set greeting string
+  BLE.setAdvertisedService(sensorService); // Advertise service
+  sensorService.addCharacteristic(sensorCharacteristic); // Add characteristic to service
+  BLE.addService(sensorService); // Add service
+  sensorCharacteristic.setValue(greeting); // Set greeting string
 
   BLE.advertise();  // Start advertising
   Serial.print("Peripheral device MAC: ");
@@ -44,13 +49,16 @@ void loop() {
     digitalWrite(LED_BUILTIN, HIGH);
 
     while (central.connected()){
-//      Serial.println("connected.....");
       // read the value from the sensor:
-      int flexValue1 = analogRead(flexPin1);
+      int flexValueR = analogRead(flexPinR);
+      int forceValueR = analogRead(forcePinR);
+
       // print out the value you read:
-      Serial.println(flexValue1);
-      greetingCharacteristic.writeValue(String(flexValue1));
-//      greetingCharacteristic.writeValue(String(121238));
+      String valuesToSend = String(flexValueR) + ","
+        + String(forceValueR);
+      
+      Serial.println(valuesToSend);
+      sensorCharacteristic.writeValue(valuesToSend);
 
       // delay in between reads for stability
       delay(100);   
