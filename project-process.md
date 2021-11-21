@@ -174,3 +174,28 @@ Just minor fixes on how to combine the components (copper paper to help connecti
 
 - How to connect the battery with the JST end. As described above, I got the female ends that seem to match the JST male ends of the battery but also seem not to be working with the microcontroller. Not sure whether this is the problem with the cable or that I connect it incorrectly.
 - The mobile app to connect to Bluetooth. I might switch to Swift if not able to work with the second package.
+
+
+
+# Project post - 11/21
+
+**Description:** Ankle protector with sensors tracking movements and gestures of the ankle, and IOS App to read sensor data and warm users for incorrect movements or gestures.
+
+**responses from comments**
+
+- JST female end not working - We figured it out in class that we just attached the positive and negative ends incorrectly. Will solder it to the microcontroller after connecting all the sensors.
+- App with Bluetooth - we discussed in class that we need to make sure that the phone can detect the microcontroller with Bluetooth (and that my phone can detect it with other existing apps) and then agree to try the packages out and switch if not working
+
+**weekly accomplishments**
+
+- I tried sewing the other two sensors with the microcontroller but seems that I still got the wrong resistor. Will try again in class.
+- I think that I made great progress on the ios app that I can read the sensor data continuously now. I spent some time trying the two packages with React Native (react-native-ble-manager and react-native-ble-plx) but neither of them works for me. So, I switch to Swift with Xcode, spent time learning how to set up the app, Bluetooth, and can now read the data (though with ugly and plain UI and did not figure out how to do notification but they should be much easier compared to reading data.)
+
+**changes to your approach**
+
+Just minor fixes on app development from using React Native to Swift.
+
+**areas of concern**
+
+- Not too much. I have a few concerns about choosing the right resistors by testing the resistance of the sensors, but since I did connect two sensors correctly before, maybe there just needs to be some more tests on the sensor resistors.
+
