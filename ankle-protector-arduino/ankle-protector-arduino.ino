@@ -8,8 +8,14 @@ BLEStringCharacteristic sensorCharacteristic("2A56",  // standard 16-bit charact
 //Right flex
 const int flexPinR = A0;
 
+//Left fles
+const int flexPinL = A2;
+
 //Right force
 const int forcePinR = A6;
+
+//Left force
+const int forcePinL = A4;
 
 
 void setup() {
@@ -51,11 +57,16 @@ void loop() {
     while (central.connected()){
       // read the value from the sensor:
       int flexValueR = analogRead(flexPinR);
+      int flexValueL = analogRead(flexPinL);
+      flexValueL = map(flexValueL, 100, 200, 0, 1000);
       int forceValueR = analogRead(forcePinR);
+      int forceValueL = analogRead(forcePinL);
 
       // print out the value you read:
       String valuesToSend = String(flexValueR) + ","
-        + String(forceValueR);
+        + String(flexValueL) + ","
+        + String(forceValueR) + ","
+        + String(forceValueL) + ",";
       
       Serial.println(valuesToSend);
       sensorCharacteristic.writeValue(valuesToSend);
