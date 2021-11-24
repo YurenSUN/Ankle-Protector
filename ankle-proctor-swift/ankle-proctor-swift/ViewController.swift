@@ -11,24 +11,37 @@ import UIKit
 import CoreBluetooth
 import os
 
+let waitingStr = "Finding Device...";
+
 class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDelegate {
-    // Properties for bluetooth
+    // Properties for bluetooth.
     private var centralManager: CBCentralManager!
     private var peripheral: CBPeripheral!
     private var sensorChar: CBCharacteristic?
     
-    // Fields
+    // Properties for matedata.
+    private var waitingStringRepeatFour = waitingStr + "," + waitingStr + "," + waitingStr + "," + waitingStr
+
+    // Properties for control.
     private var isScanning = false
+    private var isConnecting = false
+    private var isMonitoring = false
+
+    // Properties in UI.
+    // Show connection data.
+    @IBOutlet weak var serviceUUIDText: UILabel!
+    @IBOutlet weak var charUUIDText: UILabel!
     
     // Show the sensor data
-    // Arduino data
     @IBOutlet weak var leftFlexData: UILabel!
     @IBOutlet weak var RightFlexData: UILabel!
     @IBOutlet weak var leftForceData: UILabel!
     @IBOutlet weak var rightForceData: UILabel!
     @IBOutlet weak var changeScanBtn: UIButton!
+    @IBOutlet weak var changeConnectBtn: UIButton!
+    @IBOutlet weak var changeMonitorBtn: UIButton!
     
-    
+    // Start of Bluetooth setting to get data.
     /*
      * updates when the bluetooth peripheral is switched on or off,
      * start scanning here.
@@ -101,9 +114,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
             for characteristic in characteristics {
                 if characteristic.uuid == ParticlePeripheral.sensorCharacteristicUUID {
                     print("Sensor characteristic found")
-                    sensorChar = characteristic
+                    self.sensorChar = characteristic
                     // Enable the button after the char is found
-                    changeScanBtn.isEnabled = true;
+                    self.changeScanBtn.isEnabled = true;
                 }
             }
         }
@@ -146,7 +159,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
      */
     private func cleanup() {
         // Don't do anything if we're not connected
-        guard let discoveredPeripheral = peripheral,
+        guard let discoveredPeripheral = self.peripheral,
               case .connected = discoveredPeripheral.state else { return }
         
         for service in (discoveredPeripheral.services ?? [] as [CBService]) {
@@ -161,23 +174,39 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         // If we've gotten this far, we're connected, but we're not subscribed, so we just disconnect
         centralManager.cancelPeripheralConnection(discoveredPeripheral)
     }
-    
+    // End of Bluetooth Control Functions.
     
     /*
-     * Button click to handle scan or stop scan
+     * Button click to handle scan or stop scan.
+     * Set the title of button and change scanning status.
      */
     @IBAction func changeScanOnClick(_ sender: UIButton){
-        changeScanBtn.setTitle(isScanning ? "Start Scanning" : "Stop Scanning", for: .normal)
-        isScanning = !isScanning
+        self.changeScanBtn.setTitle(self.isScanning ? "Start Scanning" : "Stop Scanning", for: .normal)
+        self.isScanning = !self.isScanning
         if (isScanning){
             peripheral.readValue(for: sensorChar!)
         }
+    }
+    
+    /*
+     * Button click to handle start or end connection.
+     * Set the title of button and change connection status.
+     */
+    @IBAction func changeConnectioOnClick(_ sender: UIButton) {
+        self.changeConnectBtn.setTitle(self.isConnecting ? "Start Connection" : "Stop Connection", for: .normal)
+        self.isConnecting = !self.isConnecting
+        // Reset precious connections status.
+        cleanup()
+        self.isScanning = false
+        setDataLabels(stringFromData: self.waitingStringRepeatFour)
         
-        //        while(isScanning){
-        //            print("in loop");
-        //            await peripheral.readValue(for: self.sensorChar!)
-        //            sleep(2)
-        //        }
+        if (self.isConnecting){
+            // Disable scanning till connected.
+            self.changeScanBtn.isEnabled = false;
+            centralManager = CBCentralManager(delegate: self, queue: nil)
+        }else{
+            
+        }
     }
     
     
@@ -186,29 +215,27 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
      */
     func setDataLabels(stringFromData: String){
         let dataItems = stringFromData.components(separatedBy: ",")
-        self.leftFlexData.text = dataItems[0];
-        self.RightFlexData.text = dataItems[1];
-        self.leftForceData.text = dataItems[2];
-        self.rightForceData.text = dataItems[3];
+        leftFlexData.text = dataItems[0];
+        RightFlexData.text = dataItems[1];
+        leftForceData.text = dataItems[2];
+        rightForceData.text = dataItems[3];
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Bluetooth
-        centralManager = CBCentralManager(delegate: self, queue: nil)
         
         // Change the texts in labels while searching devices
-        let waitingStr = "Finding Device...";
-        leftFlexData.text = waitingStr;
-        RightFlexData.text = waitingStr;
-        leftForceData.text = waitingStr;
-        rightForceData.text = waitingStr;
+        print(self.waitingStringRepeatFour)
+//        setDataLabels(stringFromData: self.waitingStringRepeatFour)
         
         // Disable the button until device is found.
-        changeScanBtn.isEnabled = false;
+        self.changeScanBtn.isEnabled = false
+        self.changeMonitorBtn.isEnabled = false
+        
+        // Connect Bluetooth onload. So far, not doing this
+        // untill the start connection btn is clicked.
+        // centralManager = CBCentralManager(delegate: self, queue: nil)
     }
-    
-    
 }
 

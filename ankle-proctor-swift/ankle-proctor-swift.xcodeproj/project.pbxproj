@@ -15,6 +15,7 @@
 		A413ADE0274AD96E003031A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A413ADDE274AD96E003031A7 /* LaunchScreen.storyboard */; };
 		A413ADEA274ADA32003031A7 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A413ADE9274ADA32003031A7 /* ExternalAccessory.framework */; };
 		A413ADEE274ADBFC003031A7 /* ParticlePeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = A413ADED274ADBFC003031A7 /* ParticlePeripheral.swift */; };
+		A4DCAFAE274EE9330045B404 /* thresholds.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4DCAFAD274EE9330045B404 /* thresholds.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		A413ADE9274ADA32003031A7 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
 		A413ADEB274ADA5C003031A7 /* ankle-proctor-swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ankle-proctor-swift.entitlements"; sourceTree = "<group>"; };
 		A413ADED274ADBFC003031A7 /* ParticlePeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticlePeripheral.swift; sourceTree = "<group>"; };
+		A4DCAFAD274EE9330045B404 /* thresholds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thresholds.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				A413ADED274ADBFC003031A7 /* ParticlePeripheral.swift */,
+				A4DCAFAD274EE9330045B404 /* thresholds.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 				A413ADD8274AD964003031A7 /* ViewController.swift in Sources */,
 				A413ADD4274AD964003031A7 /* AppDelegate.swift in Sources */,
 				A413ADD6274AD964003031A7 /* SceneDelegate.swift in Sources */,
+				A4DCAFAE274EE9330045B404 /* thresholds.swift in Sources */,
 				A413ADEE274ADBFC003031A7 /* ParticlePeripheral.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

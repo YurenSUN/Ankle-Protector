@@ -8,12 +8,20 @@
 
 import Foundation
 import UIKit
-    import CoreBluetooth
+import CoreBluetooth
 
-    class ParticlePeripheral: NSObject {
-        // In arduino, set service UUID to 180C and char UUID to 2A56
-        public static let particleServiceUUID     = CBUUID.init(string: "180C")
-        public static let sensorCharacteristicUUID   = CBUUID.init(string: "2A56")
-
+class ParticlePeripheral: NSObject {
+    // In arduino, set service UUID to 180C and char UUID to 2A56
+    public static var particleServiceUUID     = CBUUID.init(string: "180C")
+    public static var sensorCharacteristicUUID   = CBUUID.init(string: "2A56")
+    
+    func setServiceUUID(uuidStr: String){
+        ParticlePeripheral.particleServiceUUID = CBUUID.init(string: uuidStr)
     }
+    
+    func setCharUUID(uuidStr: String){
+        ParticlePeripheral.particleServiceUUID = CBUUID.init(string: uuidStr)
+    }
+    
+}
 
