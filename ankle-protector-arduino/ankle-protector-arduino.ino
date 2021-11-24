@@ -58,7 +58,8 @@ void loop() {
       // read the value from the sensor:
       int flexValueR = analogRead(flexPinR);
       int flexValueL = analogRead(flexPinL);
-      flexValueL = map(flexValueL, 100, 200, 0, 1000);
+      // with 100kohm resistor
+      flexValueL = map(flexValueL, 275, 450, -200, 300);
       int forceValueR = analogRead(forcePinR);
       int forceValueL = analogRead(forcePinL);
 
@@ -67,7 +68,7 @@ void loop() {
         + String(flexValueL) + ","
         + String(forceValueR) + ","
         + String(forceValueL) + ",";
-      
+
       Serial.println(valuesToSend);
       sensorCharacteristic.writeValue(valuesToSend);
 

@@ -199,3 +199,6 @@ Just minor fixes on app development from using React Native to Swift.
 
 - Not too much. I have a few concerns about choosing the right resistors by testing the resistance of the sensors, but since I did connect two sensors correctly before, maybe there just needs to be some more tests on the sensor resistors.
 
+# Project post - 11/28
+
+**Name changed**: Smart Ankle Sensor
