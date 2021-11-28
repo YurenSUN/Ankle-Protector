@@ -202,3 +202,28 @@ Just minor fixes on app development from using React Native to Swift.
 # Project post - 11/28
 
 **Name changed**: Smart Ankle Sensor
+
+**Description**: A technology-enhanced ankle brace that uses sensors to track incorrect movements and alerts the wearer to avoid further injury. 
+
+**responses from comments**
+
+- Sensor not working - changed the resistor and it is working now
+- Suggested changes to description and name - change to the brainstormed name and the description suggested.
+
+**weekly accomplishments**
+
+- Had some updates on the iOS App, such as adding all the components needed and adding more functions such as enabling users to connect/disconnect when they want and setting the thresholds. Notifications to be added but found some useful documents to work with.
+- Got all the functionalities for the sensors part working - the four sensors are now all working and the battery can be connected (did not solder the female end but used some threads to fix them as it fixed into the microcontroller pretty well.) Now working on masking all the components (another layer of textile on all the sensors to hide the circuits.)
+- Add the hook part of the hook and loop tapes to it, but I still need to manually sew them to the textile as they do not stick to the textile well. I sewed the hooks behind the two sensors on the left sides and they (along with the sensors) worked well when sticking to the braces.
+
+![project-1128](./imgs/1128-progress.jpeg)
+
+![project-1128](./imgs/1128-ui.png)
+
+**changes to your approach**
+
+Just minor changes - not using soldering as the female ends already fix well to the microcontroller and need to sew the hook part to the textile manually
+
+**areas of concern**
+
+Not so far. I got most of the functionalities working, and just need to combine all of them together and have more development on the app to do.
