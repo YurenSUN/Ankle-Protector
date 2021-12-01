@@ -9,15 +9,15 @@ import Foundation
 
 class Thresholds: NSObject {
     // Set default thresholds
-    public static var leftPressureMax = 1000
-    public static var rightPressureMax = 1000
-    public static var leftFlexMax = 1000
-    public static var rightFlexMax = 1000
-    public static var leftFlexMin = -1000
-    public static var rightFlexMin = -1000
+    public var leftPressureMax = 1000
+    public var rightPressureMax = 1000
+    public var leftFlexMax = 1000
+    public var rightFlexMax = 1000
+    public var leftFlexMin = -1000
+    public var rightFlexMin = -1000
 
     func setLeftPressureMax(threshold: Int){
-        Thresholds.leftPressureMax = threshold
+        self.leftPressureMax = Int(threshold)
     }
 
     func setRightPressureMax(threshold: Int){

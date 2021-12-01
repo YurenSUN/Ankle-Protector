@@ -21,12 +21,13 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     // Properties for matedata.
     private var waitingStringRepeatFour = waitingStr + "," + waitingStr + "," + waitingStr + "," + waitingStr
-
+    
     // Properties for control.
     private var isScanning = false
     private var isConnecting = false
     private var isMonitoring = false
-
+    private var thresholds = Thresholds.init()
+    
     // Properties in UI.
     // Show connection data.
     @IBOutlet weak var serviceUUIDText: UILabel!
@@ -221,13 +222,84 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         rightForceData.text = dataItems[3];
     }
     
+    func sendThresholdAlert(){
+        let defaultAction = UIAlertAction(title: "OK",style: .cancel) { (action) in
+         // Respond to user selection of the action.
+        }
+        let alert = UIAlertController(title: "Invalid threshold",
+              message: "Please wait till sensor data is read to set the thresholds.",
+              preferredStyle: .alert)
+        alert.addAction(defaultAction)
+        
+        self.present(alert, animated: true) {
+              // The alert was presented
+           }
+    }
     
+    // Buttons to set thresholds with sensor data.
+    // Send alert if sensor data is not received yet.
+    @IBAction func SetLeftMaxSensor(_ sender: UIButton) {
+        if ((Int(String(self.leftFlexData.text ?? ""))) != nil){
+            self.thresholds.setLeftFlexMax(threshold: Int(String(self.leftFlexData.text ?? "")) ?? 0)
+
+        }else{
+            self.sendThresholdAlert()
+            
+        }
+    }
+    
+    
+    @IBAction func setLeftFlexMin(_ sender: Any) {
+        let curText = self.leftFlexData.text ?? ""
+        if ((Int(String(curText))) != nil){
+            self.thresholds.setLeftFlexMin(threshold: Int(String(curText)) ?? 0)
+
+        }else{
+            self.sendThresholdAlert()
+        }
+    }
+    
+    
+    @IBAction func setRightFlexMax(_ sender: Any) {
+        let curText = self.RightFlexData.text ?? ""
+        if ((Int(String(curText))) != nil){
+            self.thresholds.setRightFlexMax(threshold: Int(String(curText)) ?? 0)
+
+        }else{
+            self.sendThresholdAlert()
+        }
+    }
+    
+    
+    @IBAction func setRightFlexMin(_ sender: Any) {
+        let curText = self.RightFlexData.text ?? ""
+        if ((Int(String(curText))) != nil){
+            self.thresholds.setRightFlexMin(threshold: Int(String(curText)) ?? 0)
+
+        }else{
+            self.sendThresholdAlert()
+        }
+    }
+    
+    
+    @IBAction func setRightForce(_ sender: Any) {
+        let curText = self.rightForceData.text ?? ""
+        if ((Int(String(curText))) != nil){
+            self.thresholds.setRightPressureMax(threshold: Int(String(curText)) ?? 0)
+
+        }else{
+            self.sendThresholdAlert()
+            print(thresholds.leftPressureMax)
+        }
+    }
+    
+    
+    
+    // Onload, initialize everything if needed.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Change the texts in labels while searching devices
-        print(self.waitingStringRepeatFour)
-//        setDataLabels(stringFromData: self.waitingStringRepeatFour)
+        //        setDataLabels(stringFromData: self.waitingStringRepeatFour)
         
         // Disable the button until device is found.
         self.changeScanBtn.isEnabled = false
