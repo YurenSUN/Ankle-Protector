@@ -227,3 +227,22 @@ Just minor changes - not using soldering as the female ends already fix well to 
 **areas of concern**
 
 Not so far. I got most of the functionalities working, and just need to combine all of them together and have more development on the app to do.
+
+
+
+# Project post - 12/05
+
+**responses from comments:** Thanks for all your helps on the project, and name and descriptions :D
+
+**weekly accomplishments**
+
+- Got the sensor part finished
+- Got notification functions work for one sensor data, need to continue code for others, should be similar. Also, I tend to add notification functions when the app is running in the background if I have time next week :) but not a necessary part.
+- Brainstorming about the icon of the App but not getting an ideal one, will skip this if there is not enough time on this.
+
+**Images**
+
+![project-1128](./imgs/1205-progress.jpeg)
+
+
+
