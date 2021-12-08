@@ -26,7 +26,14 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     private var isScanning = false
     private var isConnecting = false
     private var isMonitoring = false
-    private var thresholds = Thresholds.init()
+    
+    // Thresholds
+    public var leftPressureMax = 1000
+    public var rightPressureMax = 1000
+    public var leftFlexMax = 1000
+    public var rightFlexMax = 1000
+    public var leftFlexMin = -1000
+    public var rightFlexMin = -1000
     
     // Properties in UI.
     // Show connection data.
@@ -224,36 +231,38 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     
     func sendThresholdAlert(){
         let defaultAction = UIAlertAction(title: "OK",style: .cancel) { (action) in
-         // Respond to user selection of the action.
+            // Respond to user selection of the action.
         }
         let alert = UIAlertController(title: "Invalid threshold",
-              message: "Please wait till sensor data is read to set the thresholds.",
-              preferredStyle: .alert)
+                                      message: "Please wait till sensor data is read to set the thresholds.",
+                                      preferredStyle: .alert)
         alert.addAction(defaultAction)
         
         self.present(alert, animated: true) {
-              // The alert was presented
-           }
+            // The alert was presented
+        }
     }
     
     // Buttons to set thresholds with sensor data.
     // Send alert if sensor data is not received yet.
     @IBAction func SetLeftMaxSensor(_ sender: UIButton) {
-        if ((Int(String(self.leftFlexData.text ?? ""))) != nil){
-            self.thresholds.setLeftFlexMax(threshold: Int(String(self.leftFlexData.text ?? "")) ?? 0)
-
+        let curText = self.leftFlexData.text ?? ""
+        
+        if ((Int(String(curText))) != nil){
+            self.leftFlexMax = Int(String(curText)) ?? 0
+            
         }else{
             self.sendThresholdAlert()
-            
         }
     }
     
     
     @IBAction func setLeftFlexMin(_ sender: Any) {
         let curText = self.leftFlexData.text ?? ""
+        
         if ((Int(String(curText))) != nil){
-            self.thresholds.setLeftFlexMin(threshold: Int(String(curText)) ?? 0)
-
+            self.leftFlexMin = Int(String(curText)) ?? 0
+            
         }else{
             self.sendThresholdAlert()
         }
@@ -263,8 +272,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     @IBAction func setRightFlexMax(_ sender: Any) {
         let curText = self.RightFlexData.text ?? ""
         if ((Int(String(curText))) != nil){
-            self.thresholds.setRightFlexMax(threshold: Int(String(curText)) ?? 0)
-
+            self.rightFlexMax = Int(String(curText)) ?? 0
+            
         }else{
             self.sendThresholdAlert()
         }
@@ -274,8 +283,8 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     @IBAction func setRightFlexMin(_ sender: Any) {
         let curText = self.RightFlexData.text ?? ""
         if ((Int(String(curText))) != nil){
-            self.thresholds.setRightFlexMin(threshold: Int(String(curText)) ?? 0)
-
+            self.rightFlexMin = Int(String(curText)) ?? 0
+            
         }else{
             self.sendThresholdAlert()
         }
@@ -285,11 +294,10 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
     @IBAction func setRightForce(_ sender: Any) {
         let curText = self.rightForceData.text ?? ""
         if ((Int(String(curText))) != nil){
-            self.thresholds.setRightPressureMax(threshold: Int(String(curText)) ?? 0)
-
+            self.rightPressureMax = Int(String(curText)) ?? 0
         }else{
             self.sendThresholdAlert()
-            print(thresholds.leftPressureMax)
+            print(self.leftPressureMax)
         }
     }
     

@@ -16,29 +16,29 @@ class Thresholds: NSObject {
     public var leftFlexMin = -1000
     public var rightFlexMin = -1000
 
-    func setLeftPressureMax(threshold: Int){
-        self.leftPressureMax = Int(threshold)
-    }
-
-    func setRightPressureMax(threshold: Int){
-        Thresholds.rightPressureMax = threshold
-    }
-    
-    func setRightFlexMax(threshold: Int){
-        Thresholds.rightFlexMax = threshold
-    }
-    
-    func setLeftFlexMax(threshold: Int){
-        Thresholds.leftFlexMax = threshold
-    }
-    
-    func setRightFlexMin(threshold: Int){
-        Thresholds.rightFlexMin = threshold
-    }
-    
-    func setLeftFlexMin(threshold: Int){
-        Thresholds.leftFlexMin = threshold
-    }
+//    func setLeftPressureMax(threshold: Int){
+//        self.leftPressureMax = Int(threshold)
+//    }
+//
+//    func setRightPressureMax(threshold: Int){
+//        self.rightPressureMax = threshold
+//    }
+//
+//    func setRightFlexMax(threshold: Int){
+//        Thresholds.rightFlexMax = threshold
+//    }
+//
+//    func setLeftFlexMax(threshold: Int){
+//        Thresholds.leftFlexMax = threshold
+//    }
+//
+//    func setRightFlexMin(threshold: Int){
+//        Thresholds.rightFlexMin = threshold
+//    }
+//
+//    func setLeftFlexMin(threshold: Int){
+//        Thresholds.leftFlexMin = threshold
+//    }
     
 
 }
