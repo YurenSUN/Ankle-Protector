@@ -59,7 +59,7 @@ void loop() {
       int flexValueR = analogRead(flexPinR);
       int flexValueL = analogRead(flexPinL);
       // with 100kohm resistor
-      flexValueL = map(flexValueL, 275, 450, -200, 300);
+      flexValueL = map(flexValueL, 299, 300, -1, 0);
       int forceValueR = analogRead(forcePinR);
       int forceValueL = analogRead(forcePinL);
 

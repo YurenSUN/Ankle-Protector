@@ -127,7 +127,7 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXV-t9-Owg">
                                 <rect key="frame" x="197" y="383" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonConfiguration key="configuration" style="gray" title="Set left Flex Min" buttonSize="mini"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Set Left Flex Min" buttonSize="mini"/>
                                 <connections>
                                     <action selector="setLeftFlexMin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Ad-DN-Zqs"/>
                                 </connections>
@@ -182,11 +182,17 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Start Monitoring" buttonSize="mini"/>
+                                <connections>
+                                    <action selector="changeMonitorStatus:" destination="BYZ-38-t0r" eventType="touchUpInside" id="z46-Qt-YcS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bZz-1V-qFO">
                                 <rect key="frame" x="30" y="548" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonConfiguration key="configuration" style="gray" title="Set Left Force Max" buttonSize="mini"/>
+                                <connections>
+                                    <action selector="setLeftForce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aOt-UI-pnp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -200,10 +206,12 @@
                         <outlet property="changeMonitorBtn" destination="eVb-pd-5rk" id="oUa-k5-w6X"/>
                         <outlet property="changeScanBtn" destination="oq9-Rb-d4O" id="T58-BN-DT4"/>
                         <outlet property="charUUIDText" destination="F62-xh-pHu" id="wid-3F-e5r"/>
+                        <outlet property="charUUIDValue" destination="F62-xh-pHu" id="Mlj-0T-oeT"/>
                         <outlet property="leftFlexData" destination="Mxu-Pq-dU6" id="tYj-0X-llL"/>
                         <outlet property="leftForceData" destination="0od-sh-CpM" id="mAO-z8-lqz"/>
                         <outlet property="rightForceData" destination="31p-hm-LIT" id="YBn-vG-MDt"/>
                         <outlet property="serviceUUIDText" destination="F62-xh-pHu" id="H3l-BW-sFB"/>
+                        <outlet property="serviceUUIDValue" destination="ooX-6L-q3c" id="utR-PG-79L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -213,7 +221,7 @@
         <!--Setting-->
         <scene sceneID="RAw-ai-Fba">
             <objects>
-                <viewController id="fL4-D5-sGt" sceneMemberID="viewController">
+                <viewController id="fL4-D5-sGt" customClass="ViewController" customModule="ankle_proctor_swift" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6bj-2J-olB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -236,6 +244,9 @@
                                 <rect key="frame" x="30" y="156" width="180" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Set UUIDs"/>
+                                <connections>
+                                    <action selector="setUUIDs:" destination="fL4-D5-sGt" eventType="touchUpInside" id="2eT-6y-5NH"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="180C" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WE0-SV-cWa">
                                 <rect key="frame" x="190" y="62" width="157" height="34"/>
@@ -243,7 +254,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="265A" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lO-Ch-LOY">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2A56" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lO-Ch-LOY">
                                 <rect key="frame" x="190" y="104" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -291,37 +302,37 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="txz-y9-PbY">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="txz-y9-PbY">
                                 <rect key="frame" x="190" y="260" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1N-Mi-1PK">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="x1N-Mi-1PK">
                                 <rect key="frame" x="190" y="304" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEL-8H-rbJ">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JEL-8H-rbJ">
                                 <rect key="frame" x="190" y="346" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-8l-YHX">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0lb-8l-YHX">
                                 <rect key="frame" x="190" y="390" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NGn-03-rUw">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NGn-03-rUw">
                                 <rect key="frame" x="190" y="432" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="olH-Xw-dfk">
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1000" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="olH-Xw-dfk">
                                 <rect key="frame" x="190" y="476" width="157" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -335,7 +346,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EKe-ka-whs">
-                                <rect key="frame" x="30" y="34" width="101" height="24"/>
+                                <rect key="frame" x="30" y="33" width="101" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" name="AccentColor"/>
@@ -345,6 +356,9 @@
                                 <rect key="frame" x="30" y="524" width="180" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Set Thresholds"/>
+                                <connections>
+                                    <action selector="setAllThresholds:" destination="fL4-D5-sGt" eventType="touchUpInside" id="Xa4-dZ-B7q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jOh-X6-WlM"/>
@@ -352,6 +366,16 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Setting" image="pencil" catalog="system" id="1Yt-m8-M2b"/>
                     <navigationItem key="navigationItem" id="NjD-3G-ciZ"/>
+                    <connections>
+                        <outlet property="charUUIDIn" destination="0lO-Ch-LOY" id="Ixc-H3-BjD"/>
+                        <outlet property="leftFlexMaxIn" destination="txz-y9-PbY" id="PGj-P7-rWp"/>
+                        <outlet property="leftFlexMinIn" destination="x1N-Mi-1PK" id="kOW-jb-i2a"/>
+                        <outlet property="leftForceIn" destination="NGn-03-rUw" id="1NC-4k-KOq"/>
+                        <outlet property="rightFlexMaxIn" destination="JEL-8H-rbJ" id="1ot-IS-gAg"/>
+                        <outlet property="rightFlexMinIn" destination="0lb-8l-YHX" id="CME-56-7WQ"/>
+                        <outlet property="rightForceIn" destination="olH-Xw-dfk" id="aKD-6t-u6D"/>
+                        <outlet property="serviceUUIDIn" destination="WE0-SV-cWa" id="vPa-CT-iUe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LRb-FP-LL1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
