@@ -185,7 +185,7 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         self.setDataLabels(stringFromData:stringFromData)
         
         // re-fetch the data again.
-        if (self.isMonitoring){
+        if (self.isMonitoring && !self.isNotifying){
             self.monitor(stringFromData: stringFromData)
         }
         if (self.isScanning){
@@ -301,8 +301,6 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         self.sendNotificationAlert(position: position)
         audio = AVPlayer.init(url: self.audioUrl!)
         audio.play()
-        sleep(2)
-        audio.pause()
         // Set notifying to false when close the alert
         // self.isNotifying = false
     }
@@ -311,6 +309,9 @@ class ViewController: UIViewController, CBPeripheralDelegate, CBCentralManagerDe
         let defaultAction = UIAlertAction(title: "OK",style: .cancel) { (action) in
             // Respond to user selection of the action.
             self.isNotifying = false
+            if ((self.audio) != nil){
+                self.audio.pause()
+            }
         }
         
         let alert = UIAlertController(title: "Harmful movement detected",

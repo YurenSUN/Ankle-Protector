@@ -245,4 +245,3 @@ Not so far. I got most of the functionalities working, and just need to combine 
 ![project-1128](./imgs/1205-progress.jpeg)
 
 
-

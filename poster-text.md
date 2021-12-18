@@ -1,4 +1,4 @@
-# Draft, 11-27
+## Draft, 11-27
 
 **Yuren Sun, Senior undergraduate, Computer Sciences, Economics, and Mathematics**
 
